@@ -1,0 +1,47 @@
+@startuml practica3reto6DiagramaActividadEstados
+[*] --> EncargandoProducto
+
+EncargandoProducto : entry / mostrar catálogo a cliente
+EncargandoProducto : do / recibir especificaciones del pedido
+EncargandoProducto : exit / enviar solicitud
+
+EncargandoProducto --> ValidandoPedido : procesar pedido
+ValidandoPedido : entry / leer solicitud del pedido
+ValidandoPedido : do / verificar la solicitud y calcular monto total
+ValidandoPedido : exit / enviar monto total
+
+ValidandoPedido --> Cobrando : cobrar
+Cobrando : entry / indicar monto a cliente
+Cobrando : do / solicitar datos
+Cobrando : exit / cargar datos
+
+Cobrando --> ObteniendoProducto : realizar pedido
+ObteniendoProducto : entry / leer pedido
+ObteniendoProducto : do / buscar producto en inventario
+ObteniendoProducto : exit / enviar pedido
+
+state decision <<choice>>
+ObteniendoProducto --> decision : enviar pedido
+
+decision --> EnviandoUrgente : [urgente]
+decision --> EnviandoOrdinario : [no urgente]
+
+state bifurcacion <<fork>>
+EnviandoUrgente --> bifurcacion
+EnviandoOrdinario --> bifurcacion
+
+bifurcacion --> DandoCervezaTransportista
+
+state decision2 <<choice>>
+DandoCervezaTransportista --> decision2
+
+decision2 --> AgregandoListaCliente : [cliente satisfecho]
+
+state bifurcacion2 <<fork>>
+AgregandoListaCliente --> bifurcacion2
+decision2 --> bifurcacion2 : [cliente insatisfecho]
+
+bifurcacion2 --> EnviandoRecibo : procesar venta
+EnviandoRecibo --> [*]
+
+@enduml

@@ -1,0 +1,9 @@
+@startuml practica3reto6DiagramaComunicaciones
+
+agent ": Registro" as Registro
+
+agent ": Venta" as Venta
+
+Registro - Venta : "1 : crearNuevaVenta() -> \n 2 : introducirArticulo(ArticuloID id, int cant) -> \n 3 : venta.crearLineaVenta(espec, cant) -> \n 4 : crearLineaVenta(espec, cant) <- \n 5 : finalizarVenta() ->"
+
+@enduml
