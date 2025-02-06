@@ -1,0 +1,45 @@
+@startuml reto15
+
+class TurnOnDevices {
+    +main(String[] args)
+    +turnOnDevice(Connectable device)
+}
+
+class Connectable {
+    +turnOn()
+    +turnOff()
+    +isOn()
+}
+
+class Lamp {-
+    +turnOn()
+    +turnOff()
+    +isOn()
+}
+
+class Computer {
+    +turnOn()
+    +turnOff()
+    +isOn()
+}
+
+class CoffeMaker {
+    +On()
+    +Off()
+    +isOff()
+}
+
+class Adapter {
+    -CoffeMaker coffeMaker
+    +Adapter(CoffeMaker coffeMaker)
+    +turnOn()
+    +turnOff()
+    +isOn()
+}
+
+TurnOnDevices --> Connectable
+Connectable <|-- Lamp
+Connectable <|-- Computer
+Connectable <|-- Adapter
+Adapter --> CoffeMaker
+@enduml
